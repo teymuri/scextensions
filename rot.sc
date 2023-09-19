@@ -1,6 +1,6 @@
 
 
-Rot {
+GRot {
 
 	// Gruppenrotation
 
