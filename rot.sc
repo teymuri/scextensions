@@ -10,6 +10,11 @@ GRot {
 		^rotations
 	}
 
+	// Return the number of rotations
+	size {
+		^sizeLcm
+	}
+
 	*new {
 		arg idxarrs, items=nil, appendhead=false, excludehead=false;
 		// Wenn es items gibt, die items werden ausgegeben, statt die idxarrs selbst
@@ -55,7 +60,7 @@ GRot {
 		}
 	}
 
-	fltn {
+	flatten {
 		^rotations.collect {
 			arg rot;
 			rot.collect {
@@ -77,7 +82,7 @@ GRot {
 	post {
 		arg flat=true;
 		if (flat) {
-			this.fltn.do {arg x,i; "%. %\n".postf(i, x)}
+			this.flatten.do {arg x,i; "%. %\n".postf(i, x)}
 		} {
 			this.getrotations.do {arg x,i; "%. %\n".postf(i, x)}
 		};
@@ -85,7 +90,7 @@ GRot {
 	}
 
 	zip {
-		^this.fltn.collect {
+		^this.flatten.collect {
 			arg lst;
 			lst[0].size.collect {
 				arg i;
@@ -94,10 +99,10 @@ GRot {
 		}.flatten
 	}
 
-	clmns {
+	columns {
 		^seqssize.collect {
 			arg i;
-			this.fltn.collect {
+			this.flatten.collect {
 				arg rot;
 				rot[i]
 			}.flatten
